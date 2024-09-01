@@ -25,11 +25,11 @@ function checkCollisions(el) {
     return { originalBox: rect1, otherBox: otherBox, original: el, other: other };
 }
 
-const dragSpeedCap = window.screen.availWidth <= 480 ? 3 : 8;
-const randomSpeedCap= window.screen.availWidth <= 480 ? 1.5 : 3;
+const dragSpeedCap = window.innerWidth <= 480 ? 4 : 8;
+const randomSpeedCap= window.innerWidth <= 480 ? 3 : 6;
 function initCard(el, x, y, xSpeed, ySpeed) {
-    if (x === undefined) x = Math.random() * window.screen.availWidth;
-    if (y === undefined) y = Math.random() * window.screen.availHeight;
+    if (x === undefined) x = Math.random() * window.innerWidth;
+    if (y === undefined) y = Math.random() * window.innerHeight;
     if (xSpeed === undefined) xSpeed = (Math.random() * 2 - 1) * randomSpeedCap;
     if (ySpeed === undefined) ySpeed = (Math.random() * 2 - 1) * randomSpeedCap;
     if (Math.abs(xSpeed) > dragSpeedCap) xSpeed = dragSpeedCap * Math.sign(xSpeed)
@@ -38,20 +38,22 @@ function initCard(el, x, y, xSpeed, ySpeed) {
 
     function updatePosition() {
         if (el.is(":hidden") || el.is(":active")) return;
+        x += xSpeed;
+        y += ySpeed;
 
         if (x <= 0) {
             x = 0;
             xSpeed *= -1;
-        } else if (x + el.outerWidth() >= window.screen.availWidth) {
-            x = window.screen.availWidth - el.outerWidth();
+        } else if (x + el.outerWidth() >= window.innerWidth) {
+            x = window.innerWidth - el.outerWidth();
             xSpeed *= -1;
         }
 
         if (y <= 0) {
             y = 0;
             ySpeed *= -1;
-        } else if (y + el.outerHeight() >= window.screen.availHeight) {
-            y = window.screen.availHeight - el.outerHeight();
+        } else if (y + el.outerHeight() >= window.innerHeight) {
+            y = window.innerHeight - el.outerHeight();
             ySpeed *= -1;
         }
 
@@ -75,8 +77,6 @@ function initCard(el, x, y, xSpeed, ySpeed) {
             }
         } else isInside = null;
 
-        x += xSpeed;
-        y += ySpeed;
         el.offset({ left: x, top: y });
         requestAnimationFrame(updatePosition);
     }
