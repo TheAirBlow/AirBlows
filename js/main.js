@@ -25,6 +25,9 @@ function checkCollisions(el) {
     return { originalBox: rect1, otherBox: otherBox, original: el, other: other };
 }
 
+const dragSpeedCap = window.innerWidth <= 480 ? 3 : 5;
+const randomSpeedCap = window.innerWidth <= 480 ? 1 : 3;
+
 function initCard(el, x, y, xSpeed, ySpeed) {
     if (x === undefined) x = Math.random() * document.documentElement.clientWidth;
     if (y === undefined) y = Math.random() * document.documentElement.clientHeight;
@@ -118,6 +121,11 @@ function cardAction(el) {
 }
 
 $(document).ready(function() {
+    if (window.innerWidth <= 480) {
+        // remove collider with profile pic and username
+        $(".collider:visible").removeClass(".collider");
+    }
+
     $(".flying-card:visible").each(function() {
         initCard($(this))
     })

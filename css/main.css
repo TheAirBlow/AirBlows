@@ -9,6 +9,10 @@
     z-index: 3;
 }
 
+.flying-card:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
 .flying-card {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 16px;
@@ -20,8 +24,20 @@
     padding: 25px;
     text-align: center;
     text-wrap: nowrap;
+    font-size: 1.25rem;
 }
 
-.flying-card:hover {
-    background: rgba(255, 255, 255, 0.2);
+.fa-solid, .fa-brands {
+    font-size: 3em;
+}
+
+@media (max-width: 480px) {
+    .flying-card {
+        font-size: 1rem;
+        padding: 15px;
+    }
+
+    .fa-solid, .fa-brands {
+        font-size: 2em;
+    }
 }
