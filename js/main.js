@@ -25,16 +25,15 @@ function checkCollisions(el) {
     return { originalBox: rect1, otherBox: otherBox, original: el, other: other };
 }
 
-const dragSpeedCap = window.innerWidth <= 480 ? 3 : 5;
-const randomSpeedCap = window.innerWidth <= 480 ? 1 : 3;
-
+const dragSpeedCap = window.screen.availWidth <= 480 ? 3 : 8;
+const randomSpeedCap= window.screen.availWidth <= 480 ? 1.5 : 3;
 function initCard(el, x, y, xSpeed, ySpeed) {
-    if (x === undefined) x = Math.random() * document.documentElement.clientWidth;
-    if (y === undefined) y = Math.random() * document.documentElement.clientHeight;
-    if (xSpeed === undefined) xSpeed = 3 * (Math.random() > 0.5 ? 1 : -1) * Math.random() * 3;
-    if (ySpeed === undefined) ySpeed = 3 * (Math.random() > 0.5 ? 1 : -1) * Math.random() * 3;
-    if (Math.abs(xSpeed) > 10) xSpeed = 5 * Math.sign(xSpeed)
-    if (Math.abs(ySpeed) > 10) ySpeed = 5 * Math.sign(ySpeed)
+    if (x === undefined) x = Math.random() * window.screen.availWidth;
+    if (y === undefined) y = Math.random() * window.screen.availHeight;
+    if (xSpeed === undefined) xSpeed = randomSpeedCap * (Math.random() > 0.5 ? 1 : -1) * Math.random() * randomSpeedCap;
+    if (ySpeed === undefined) ySpeed = randomSpeedCap * (Math.random() > 0.5 ? 1 : -1) * Math.random() * randomSpeedCap;
+    if (Math.abs(xSpeed) > dragSpeedCap) xSpeed = dragSpeedCap * Math.sign(xSpeed)
+    if (Math.abs(ySpeed) > dragSpeedCap) ySpeed = dragSpeedCap * Math.sign(ySpeed)
     let isInside = null;
 
     function updatePosition() {
@@ -43,16 +42,16 @@ function initCard(el, x, y, xSpeed, ySpeed) {
         if (x <= 0) {
             x = 0;
             xSpeed *= -1;
-        } else if (x + el.outerWidth() >= document.documentElement.clientWidth) {
-            x = document.documentElement.clientWidth - el.outerWidth();
+        } else if (x + el.outerWidth() >= window.screen.availWidth) {
+            x = window.screen.availWidth - el.outerWidth();
             xSpeed *= -1;
         }
 
         if (y <= 0) {
             y = 0;
             ySpeed *= -1;
-        } else if (y + el.outerHeight() >= document.documentElement.clientHeight) {
-            y = document.documentElement.clientHeight - el.outerHeight();
+        } else if (y + el.outerHeight() >= window.screen.availHeight) {
+            y = window.screen.availHeight - el.outerHeight();
             ySpeed *= -1;
         }
 
