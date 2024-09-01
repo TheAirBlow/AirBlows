@@ -9,7 +9,7 @@ function boom(x, y) {
 function checkCollisions(el) {
     let rect1 = el[0].getBoundingClientRect();
     let other, otherBox = null;
-    $(".flying-card:visible,.collider:visible").each(function() {
+    $(".flying-card:visible").each(function() {
         if (this !== el[0]) {
             const rect2 = this.getBoundingClientRect();
             if (!(rect1.right < rect2.left ||
@@ -120,11 +120,6 @@ function cardAction(el) {
 }
 
 $(document).ready(function() {
-    if (window.innerWidth <= 480) {
-        // remove collider with profile pic and username
-        $(".collider:visible").removeClass(".collider");
-    }
-
     $(".flying-card:visible").each(function() {
         initCard($(this))
     })
