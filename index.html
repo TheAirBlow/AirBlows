@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TheAirBlow's Place</title>
+    <meta content="TheAirBlow's Place" property="og:title" />
+    <meta content="Personal website 'n all" property="og:description" />
+    <meta content="img/autism.png" property="og:image" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="lib/fontawesome/fontawesome.min.css"/>
+    <link rel="stylesheet" href="lib/comfortaa/comfortaa.css"/>
+    <link rel="stylesheet" href="lib/bulma/bulma.min.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+</head>
+<body class="theme-dark">
+<div class="columns is-mobile is-align-items-center is-justify-content-center marginless" style="height: 100vh">
+    <div class="column is-narrow collider">
+        <figure class="image is-128x128" id="pfp">
+            <img class="is-rounded" src="res/autism.png" alt="Profile Picture" />
+        </figure>
+    </div>
+    <div class="column is-narrow collider content">
+        <h1>TheAirBlow</h1>
+        <p>
+            Click the cards to learn more.<br>
+            Have a fun time aiming :D<br>
+            <span class="is-size-7">(you can also drag them btw)</span>
+        </p>
+        <noscript>
+            <p>Please enable JavaScript :D</p>
+        </noscript>
+    </div>
+</div>
+<div class="flying-parent">
+    <div class="on-top-of-everyone flying-card rows" data-action="expand" data-target="socials">
+        <div class="row">
+            <i class="fa-solid fa-retweet fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Socials</p>
+        </div>
+    </div>
+</div>
+<div class="flying-parent">
+    <div class="on-top-of-everyone flying-card rows" data-action="expand" data-target="projects">
+        <div class="row">
+            <i class="fa-solid fa-code fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Projects</p>
+        </div>
+    </div>
+</div>
+<div class="flying-parent">
+    <div class="on-top-of-everyone flying-card rows" data-action="expand" data-target="services">
+        <div class="row">
+            <i class="fa-solid fa-server fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Services</p>
+        </div>
+    </div>
+</div>
+<div class="flying-parent">
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://sussy.dev/">
+        <div class="row">
+            <i class="fa-solid fa-star fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">sussy.dev</p>
+        </div>
+    </div>
+</div>
+<div id="services">
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://pass.airblo.ws/" style="display: none;">
+        <div class="row">
+            <i class="fa-solid fa-lock fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Vaultwarden</p>
+        </div>
+    </div>
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://git.sussy.dev/" style="display: none;">
+        <div class="row">
+            <i class="fa-brands fa-gitlab fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Gitlab</p>
+        </div>
+    </div>
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://www.youtube.com/watch?v=o-YBDTqX_ZU" style="display: none;">
+        <div class="row">
+            <i class="fa-solid fa-face-sad-cry fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Free Proxy</p>
+        </div>
+    </div>
+    <div class="on-top-of-everyone flying-card rows" data-action="back" style="display: none;">
+        <div class="row">
+            <i class="fa-solid fa-backward fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Go Back</p>
+        </div>
+    </div>
+</div>
+<div id="projects">
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://github.com/Samsung-Loki/Thor" style="display: none;">
+        <div class="row">
+            <i class="fa-solid fa-hammer fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Thor</p>
+        </div>
+    </div>
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://github.com/Samsung-Loki/Syndical" style="display: none;">
+        <div class="row">
+            <i class="fa-solid fa-download fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Syndical</p>
+        </div>
+    </div>
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://github.com/TheAirBlow/FastStages" style="display: none;">
+        <div class="row">
+            <i class="fa-solid fa-truck-fast fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">FastStages</p>
+        </div>
+    </div>
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://github.com/TheAirBlow/BetterParties" style="display: none;">
+        <div class="row">
+            <i class="fa-solid fa-book-bookmark fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">BetterParties</p>
+        </div>
+    </div>
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://github.com/TheAirBlow/HyperSploit" style="display: none;">
+        <div class="row">
+            <i class="fa-solid fa-bomb fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">HyperSploit</p>
+        </div>
+    </div>
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://github.com/TheAirBlow/Raylib-ImGui" style="display: none;">
+        <div class="row">
+            <i class="fa-solid fa-desktop fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Raylib-ImGui</p>
+        </div>
+    </div>
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://github.com/TheAirBlow/DisControl" style="display: none;">
+        <div class="row">
+            <i class="fa-brands fa-discord fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">DisControl</p>
+        </div>
+    </div>
+    <div class="on-top-of-everyone flying-card rows" data-action="back" style="display: none;">
+        <div class="row">
+            <i class="fa-solid fa-backward fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Go Back</p>
+        </div>
+    </div>
+</div>
+<div id="socials">
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://github.com/TheAirBlow/" style="display: none;">
+        <div class="row">
+            <i class="fa-brands fa-github fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Github</p>
+        </div>
+    </div>
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://xdaforums.com/m/theairblow.11597903/" style="display: none;">
+        <div class="row">
+            <i class="fa-solid fa-comments fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">XDA Forums</p>
+        </div>
+    </div>
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://www.reddit.com/user/theairblow_/" style="display: none;">
+        <div class="row">
+            <i class="fa-brands fa-reddit-alien fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Reddit</p>
+        </div>
+    </div>
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://x.com/theairblow" style="display: none;">
+        <div class="row">
+            <i class="fa-brands fa-twitter fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Tw*tter</p>
+        </div>
+    </div>
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://codeforces.com/profile/TheAirBlow" style="display: none;">
+        <div class="row">
+            <i class="fa-solid fa-code fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Codeforces</p>
+        </div>
+    </div>
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://www.tiktok.com/@theairblow" style="display: none;">
+        <div class="row">
+            <i class="fa-brands fa-tiktok fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Tiktok</p>
+        </div>
+    </div>
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://discordlookup.com/user/777865084013510696" style="display: none;">
+        <div class="row">
+            <i class="fa-brands fa-discord fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Discord</p>
+        </div>
+    </div>
+    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://t.me/theairblow" style="display: none;">
+        <div class="row">
+            <i class="fa-brands fa-telegram fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Telegram</p>
+        </div>
+    </div>
+    <div class="on-top-of-everyone flying-card rows" data-action="back" style="display: none;">
+        <div class="row">
+            <i class="fa-solid fa-backward fa-3x"></i>
+        </div>
+        <div class="row">
+            <p class="has-text-weight-bold is-size-5">Go Back</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
