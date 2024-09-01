@@ -30,8 +30,8 @@ const randomSpeedCap= window.screen.availWidth <= 480 ? 1.5 : 3;
 function initCard(el, x, y, xSpeed, ySpeed) {
     if (x === undefined) x = Math.random() * window.screen.availWidth;
     if (y === undefined) y = Math.random() * window.screen.availHeight;
-    if (xSpeed === undefined) xSpeed = randomSpeedCap * (Math.random() > 0.5 ? 1 : -1) * Math.random() * randomSpeedCap;
-    if (ySpeed === undefined) ySpeed = randomSpeedCap * (Math.random() > 0.5 ? 1 : -1) * Math.random() * randomSpeedCap;
+    if (xSpeed === undefined) xSpeed = (Math.random() * 2 - 1) * randomSpeedCap;
+    if (ySpeed === undefined) ySpeed = (Math.random() * 2 - 1) * randomSpeedCap;
     if (Math.abs(xSpeed) > dragSpeedCap) xSpeed = dragSpeedCap * Math.sign(xSpeed)
     if (Math.abs(ySpeed) > dragSpeedCap) ySpeed = dragSpeedCap * Math.sign(ySpeed)
     let isInside = null;
