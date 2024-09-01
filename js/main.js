@@ -26,8 +26,8 @@ function checkCollisions(el) {
 }
 
 function initCard(el, x, y, xSpeed, ySpeed) {
-    if (x === undefined) x = Math.random() * window.innerWidth;
-    if (y === undefined) y = Math.random() * window.innerHeight;
+    if (x === undefined) x = Math.random() * document.documentElement.clientWidth;
+    if (y === undefined) y = Math.random() * document.documentElement.clientHeight;
     if (xSpeed === undefined) xSpeed = 3 * (Math.random() > 0.5 ? 1 : -1) * Math.random() * 3;
     if (ySpeed === undefined) ySpeed = 3 * (Math.random() > 0.5 ? 1 : -1) * Math.random() * 3;
     if (Math.abs(xSpeed) > 10) xSpeed = 5 * Math.sign(xSpeed)
@@ -40,16 +40,16 @@ function initCard(el, x, y, xSpeed, ySpeed) {
         if (x <= 0) {
             x = 0;
             xSpeed *= -1;
-        } else if (x + el.outerWidth() >= window.innerWidth) {
-            x = window.innerWidth - el.outerWidth();
+        } else if (x + el.outerWidth() >= document.documentElement.clientWidth) {
+            x = document.documentElement.clientWidth - el.outerWidth();
             xSpeed *= -1;
         }
 
         if (y <= 0) {
             y = 0;
             ySpeed *= -1;
-        } else if (y + el.outerHeight() >= window.innerHeight) {
-            y = window.innerHeight - el.outerHeight();
+        } else if (y + el.outerHeight() >= document.documentElement.clientHeight) {
+            y = document.documentElement.clientHeight - el.outerHeight();
             ySpeed *= -1;
         }
 
@@ -106,7 +106,6 @@ function cardAction(el) {
             backtrace[backtrace.length - 1].show()
                 .each(function() {
                     initCard($(this));
-
                 });
             backtrace.splice(backtrace.length - 1, 1);
             break;
