@@ -5,7 +5,11 @@
 
 .on-top-of-everyone {
     position: absolute;
-    cursor: pointer;
+    z-index: 3;
+}
+
+.kaboom {
+    position: absolute;
     z-index: 3;
 }
 
@@ -25,9 +29,10 @@
     text-align: center;
     text-wrap: nowrap;
     font-size: 1.25rem;
+    cursor: pointer;
 }
 
-.fa-solid, .fa-brands {
+.flying-card i {
     font-size: 3em;
 }
 
@@ -37,7 +42,31 @@
         padding: 15px;
     }
 
-    .fa-solid, .fa-brands {
+    .flying-card i {
         font-size: 2em;
     }
+}
+
+.debug-info {
+    margin-bottom: 0 !important;
+    align-items: flex-start;
+    justify-content: left;
+    position: absolute;
+    bottom: 12px;
+    left: 20px;
+    z-index: 4;
+}
+
+.control-buttons {
+    margin-bottom: 0 !important;
+    align-items: flex-start;
+    justify-content: left;
+    position: absolute;
+    bottom: 12px;
+    right: 20px;
+    z-index: 4;
+}
+
+.control-buttons i {
+    font-size: 1.5em;
 }

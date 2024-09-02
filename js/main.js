@@ -1,162 +1,208 @@
-function boom(x, y) {
-    let boom = $(`<div class="on-top-of-everyone"><img src="res/boom.gif?t=${new Date().getTime()}" alt="boom"/></div>`)
-        .appendTo(document.body).css("left", x + "px").css("top", y + "px");
-    setTimeout(function() {
-        boom.remove();
-    }, 640);
-}
-
-function checkCollisions(el) {
-    let rect1 = el[0].getBoundingClientRect();
-    let other, otherBox = null;
-    $(".flying-card:visible").each(function() {
-        if (this !== el[0]) {
-            const rect2 = this.getBoundingClientRect();
-            if (!(rect1.right < rect2.left ||
-                rect1.left > rect2.right ||
-                rect1.bottom < rect2.top ||
-                rect1.top > rect2.bottom)) {
-                otherBox = rect2;
-                other = this;
-                return false;
-            }
-        }
-    });
-    return { originalBox: rect1, otherBox: otherBox, original: el, other: other };
-}
-
-const dragSpeedCap = window.innerWidth <= 480 ? 4 : 8;
+// settings
+const dragSpeedCap = window.innerWidth <= 480 ? 5 : 10;
 const randomSpeedCap= window.innerWidth <= 480 ? 3 : 6;
+const dragPeriodMillis = 100;
+const dragMinimumDist = 5;
+
+// dynamic stuff
+let framesPerSecond = 0;
+let activeCards = [];
+let isPaused = false;
+
+// functions
 function initCard(el, x, y, xSpeed, ySpeed) {
-    if (x === undefined) x = Math.random() * window.innerWidth;
-    if (y === undefined) y = Math.random() * window.innerHeight;
+    if (x === undefined) x = el.offset().left;
+    if (y === undefined) y = el.offset().top;
+    if (x === 0) x = Math.random() * window.innerWidth;
+    if (y === 0) y = Math.random() * window.innerHeight;
     if (xSpeed === undefined) xSpeed = (Math.random() * 2 - 1) * randomSpeedCap;
     if (ySpeed === undefined) ySpeed = (Math.random() * 2 - 1) * randomSpeedCap;
-    if (Math.abs(xSpeed) > dragSpeedCap) xSpeed = dragSpeedCap * Math.sign(xSpeed)
-    if (Math.abs(ySpeed) > dragSpeedCap) ySpeed = dragSpeedCap * Math.sign(ySpeed)
-    let isInside = null;
+    if (Math.abs(xSpeed) > dragSpeedCap) xSpeed = dragSpeedCap * Math.sign(xSpeed);
+    if (Math.abs(ySpeed) > dragSpeedCap) ySpeed = dragSpeedCap * Math.sign(ySpeed);
 
-    function updatePosition() {
-        if (el.is(":hidden") || el.is(":active")) return;
-        x += xSpeed;
-        y += ySpeed;
+    el.css({ left: x, top: y });
+    activeCards.push({
+        el: el, x: x, y: y,
+        xSpeed: xSpeed,
+        ySpeed: ySpeed
+    });
+}
 
-        if (x <= 0) {
-            x = 0;
-            xSpeed *= -1;
-        } else if (x + el.outerWidth() >= window.innerWidth) {
-            x = window.innerWidth - el.outerWidth();
-            xSpeed *= -1;
-        }
+function animateCards() {
+    framesPerSecond += 1;
 
-        if (y <= 0) {
-            y = 0;
-            ySpeed *= -1;
-        } else if (y + el.outerHeight() >= window.innerHeight) {
-            y = window.innerHeight - el.outerHeight();
-            ySpeed *= -1;
-        }
+    if (!isPaused) {
+        activeCards.forEach(card => {
+            card.x += card.xSpeed;
+            card.y += card.ySpeed;
 
-        let { original, other, originalBox, otherBox } = checkCollisions(el);
-        if (other != null) {
-            if (isInside !== other) {
-                // this works shit but at least no cards get stuck in a bumping loop
-                // nonetheless seeing XDA Forums card humping the right side was hilarious
-                const overlapX = Math.min(originalBox.right - otherBox.left, originalBox.right - otherBox.left);
-                const overlapY = Math.min(originalBox.bottom - otherBox.top, originalBox.bottom - otherBox.top);
-                if (overlapX < overlapY) {
-                    xSpeed *= -1;
-                } else if (overlapY < overlapX) {
-                    ySpeed *= -1;
-                } else {
-                    xSpeed *= -1;
-                    ySpeed *= -1;
-                }
-
-                isInside = other;
+            if (card.x <= 0) {
+                card.x = 0;
+                card.xSpeed *= -1;
+            } else if (card.x + card.el.outerWidth() >= window.innerWidth) {
+                card.x = window.innerWidth - card.el.outerWidth();
+                card.xSpeed *= -1;
             }
-        } else isInside = null;
 
-        el.offset({ left: x, top: y });
-        requestAnimationFrame(updatePosition);
+            if (card.y <= 0) {
+                card.y = 0;
+                card.ySpeed *= -1;
+            } else if (card.y + card.el.outerHeight() >= window.innerHeight) {
+                card.y = window.innerHeight - card.el.outerHeight();
+                card.ySpeed *= -1;
+            }
+
+            card.el.css({ left: card.x, top: card.y });
+        });
+
+        //checkCollisions();
     }
 
-    updatePosition();
+    requestAnimationFrame(animateCards);
+}
+
+function disableCard(el) {
+    let index = activeCards.findIndex(function(card) {
+        return card.el[0].isEqualNode(el[0])
+    });
+    activeCards.splice(index, 1);
 }
 
 const backtrace = [];
 function cardAction(el) {
-    boom(el.offset().left + el.width() / 2 - 128,
-        el.offset().top + el.height() / 2 - 128);
     switch (el.data("action")) {
         case "open-tab": {
             window.open(el.data("target"), '_blank');
-            break;
+            boom(el); break;
         }
         case "expand": {
             let target = $(`#${el.data("target")}`);
-            let hidden = $(".flying-card:visible").hide();
-            backtrace.push(hidden);
-            target.children(".flying-card").show()
-                .each(function() {
-                    initCard($(this));
+            let visible = $(".flying-card:visible");
+            visible.each(function() {
+                boom($(this));
+            });
+            backtrace.push(visible);
+            setTimeout(function() {
+                let index = 0;
+                target.children(".flying-card").show()
+                    .each(function() {
+                        let item = $(visible[index]);
+                        initCard($(this), item.offset().left, item.offset().top);
+                        index++; if (index >= visible.length) index = 0;
+                    });
+                visible.hide().each(function() {
+                    disableCard($(this));
                 });
+            }, 400);
             break;
         }
         case "back": {
-            $(".flying-card:visible").hide();
-            backtrace[backtrace.length - 1].show()
-                .each(function() {
-                    initCard($(this));
+            let visible = $(".flying-card:visible");
+            visible.each(function() {
+                boom($(this));
+            });
+            setTimeout(function() {
+                let index = 0;
+                backtrace[backtrace.length - 1].show()
+                    .each(function() {
+                        let item = $(visible[index]);
+                        initCard($(this), item.offset().left, item.offset().top);
+                        index++; if (index >= visible.length) index = 0;
+                    });
+                backtrace.splice(backtrace.length - 1, 1);
+                visible.hide().each(function() {
+                    disableCard($(this));
                 });
-            backtrace.splice(backtrace.length - 1, 1);
-            break;
-        }
-        default: {
-            el.remove();
+            }, 400);
             break;
         }
     }
 }
 
+function boom(el) {
+    function setPosition(boom) {
+        if (el.is(":hidden")) return;
+        boom.css({
+            left: el.offset().left + el.width() / 2 - 100,
+            top: el.offset().top + el.height() / 2 - 120
+        });
+    }
+
+    let boom = $(`<div class="on-top-of-everyone"><img src="res/boom.gif?t=${new Date().getTime()}" alt="boom"/></div>`)
+        .appendTo(document.body);
+    setPosition(boom);
+    let update = setInterval(function() {
+        setPosition(boom);
+    }, 10);
+    setTimeout(function() {
+        clearInterval(update);
+        boom.remove();
+    }, 640);
+}
+
+// load everything
 $(document).ready(function() {
-    $(".flying-card:visible").each(function() {
-        initCard($(this))
-    })
+    $(".flying-card:visible")
+        .each(function() {
+            initCard($(this))
+        })
 
     $(".flying-card").on("mousedown", function(e) {
         let el = $(this); let doc = $(document);
-        let data = { dragging: false, diffX: 0, diffY: 0, lastX: e.clientX, lastY: e.clientY };
+        let dragging = false;
+        let curPos = { x: e.clientX, y: e.clientY };
+        let lastPos = { x: e.clientX, y: e.clientY };
+        let nextPos = { x: e.clientX, y: e.clientY };
+        let timestamp = Date.now();
         doc.on("mousemove", function(e) {
-            data.diffX = data.lastX - e.clientX;
-            data.diffY = data.lastY - e.clientY;
-            if (!data.dragging) {
-                if (Math.abs(data.diffX) > 10 || Math.abs(data.diffY) > 10)
-                    data.dragging = true;
+            if (!dragging) {
+                if (Math.abs(curPos.x - e.clientX) + Math.abs(curPos.y - e.clientY) > dragMinimumDist) {
+                    disableCard(el); dragging = true;
+                }
             } else {
-                data.lastX = e.clientX;
-                data.lastY = e.clientY;
                 let off = el.offset();
-                el.offset({ left: off.left - data.diffX, top: off.top - data.diffY });
+                el.offset({
+                    left: off.left - (curPos.x - e.clientX),
+                    top: off.top - (curPos.y - e.clientY)
+                });
+                nextPos = curPos = { x: e.clientX, y: e.clientY };
+                if (Date.now() - timestamp > dragPeriodMillis) {
+                    timestamp = Date.now();
+                    lastPos = nextPos;
+                }
             }
         }).on("mouseup", function() {
-            if (!data.dragging) cardAction(el);
-            else setTimeout(function() {
+            if (!dragging) cardAction(el);
+            else {
                 let off = el.offset();
-                initCard(el, off.left, off.top, -data.diffX, -data.diffY);
-            }, 10);
+                if (Date.now() - timestamp > dragPeriodMillis)
+                    lastPos = nextPos;
+                initCard(el, off.left, off.top,
+                    nextPos.x - lastPos.x,
+                    nextPos.y - lastPos.y);
+            }
             doc.off("mousemove");
             doc.off("mouseup");
         })
     });
 
-    /*Please ignore this :D
-    $("#pfp").click(function() {
-       for (let i = 0; i < 100; i++)
-           boom(Math.random() * window.innerWidth,
-               Math.random() * window.innerHeight);
-        setTimeout(function() {
-            location.replace("https://www.youtube.com/watch?v=o-YBDTqX_ZU")
-        }, 600);
-    });*/
+    setInterval(function() {
+        $("#fps").text(`${framesPerSecond} FPS`)
+        framesPerSecond = 0;
+    }, 1000);
+
+    $("#refresh").click(function() {
+        $(".flying-card:visible")
+            .each(function() {
+                let el = $(this);
+                initCard(el, 0, 0);
+                boom(el);
+            })
+    })
+
+    $("#pause").click(function() {
+        isPaused = !isPaused;
+    });
+
+    animateCards();
 });
