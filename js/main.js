@@ -15,8 +15,8 @@ function initCard(el, x, y, xSpeed, ySpeed) {
     if (y === undefined) y = el.offset().top;
     if (x === 0) x = Math.random() * window.innerWidth;
     if (y === 0) y = Math.random() * window.innerHeight;
-    if (xSpeed === undefined) xSpeed = (Math.random() * 2 - 1) * randomSpeedCap;
-    if (ySpeed === undefined) ySpeed = (Math.random() * 2 - 1) * randomSpeedCap;
+    if (xSpeed === undefined) xSpeed = Math.random() * (randomSpeedCap * 2 + 1) - randomSpeedCap;
+    if (ySpeed === undefined) ySpeed = Math.random() * (randomSpeedCap * 2 + 1) - randomSpeedCap;
     if (Math.abs(xSpeed) > dragSpeedCap) xSpeed = dragSpeedCap * Math.sign(xSpeed);
     if (Math.abs(ySpeed) > dragSpeedCap) ySpeed = dragSpeedCap * Math.sign(ySpeed);
 
@@ -26,6 +26,72 @@ function initCard(el, x, y, xSpeed, ySpeed) {
         xSpeed: xSpeed,
         ySpeed: ySpeed
     });
+}
+
+function getCollisionRect(el) {
+    let rect = el[0].getBoundingClientRect()
+    let styles = window.getComputedStyle(el[0], null);
+    // for now that should work, padding is the same for all directions
+    let padding = parseInt(styles.getPropertyValue('padding-left').substring(0, -2));
+    rect.right += padding; rect.bottom += padding;
+    rect.top -= padding; rect.left -= padding;
+    return rect;
+}
+
+function checkCollisions() {
+    for (let i = 0; i < activeCards.length; i++) {
+        const cardA = activeCards[i];
+        const rectA = getCollisionRect(cardA.el);
+        const centerAX = rectA.left + rectA.width / 2;
+        const centerAY = rectA.top + rectA.height / 2;
+
+        for (let j = i + 1; j < activeCards.length; j++) {
+            const cardB = activeCards[j];
+            const rectB = getCollisionRect(cardB.el);
+            const centerBX = rectB.left + rectB.width / 2;
+            const centerBY = rectB.top + rectB.height / 2;
+            const distX = centerAX - centerBX;
+            const distY = centerAY - centerBY;
+            const distance = Math.sqrt(distX * distX + distY * distY);
+            const minDist = (rectA.width + rectB.width) / 2;
+
+            if (distance < minDist) {
+                const normalX = distX / distance;
+                const normalY = distY / distance;
+                const relativeVelocityX = cardA.xSpeed - cardB.xSpeed;
+                const relativeVelocityY = cardA.ySpeed - cardB.ySpeed;
+                const velocityAlongNormal = relativeVelocityX * normalX + relativeVelocityY * normalY;
+                if (velocityAlongNormal > 0) continue;
+                const impulse = -velocityAlongNormal;
+                const impulseX = impulse * normalX;
+                const impulseY = impulse * normalY;
+
+                cardA.xSpeed += impulseX;
+                cardA.ySpeed += impulseY;
+                cardB.xSpeed -= impulseX;
+                cardB.ySpeed -= impulseY;
+                const speedA = Math.sqrt(cardA.xSpeed * cardA.xSpeed + cardA.ySpeed * cardA.ySpeed);
+                const speedB = Math.sqrt(cardB.xSpeed * cardB.xSpeed + cardB.ySpeed * cardB.ySpeed);
+
+                const maxSpeed = Math.max(speedA, speedB);
+                if (maxSpeed > dragSpeedCap) {
+                    const scale = dragSpeedCap / maxSpeed;
+                    cardA.xSpeed *= scale;
+                    cardA.ySpeed *= scale;
+                    cardB.xSpeed *= scale;
+                    cardB.ySpeed *= scale;
+                }
+
+                const overlap = minDist - distance;
+                const correctionX = (overlap / 2) * normalX;
+                const correctionY = (overlap / 2) * normalY;
+                cardA.x += correctionX;
+                cardA.y += correctionY;
+                cardB.x -= correctionX;
+                cardB.y -= correctionY;
+            }
+        }
+    }
 }
 
 function animateCards() {
@@ -55,7 +121,7 @@ function animateCards() {
             card.el.css({ left: card.x, top: card.y });
         });
 
-        //checkCollisions();
+        checkCollisions();
     }
 
     requestAnimationFrame(animateCards);
