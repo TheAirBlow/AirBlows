@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TheAirBlow's Place</title>
-    <meta content="TheAirBlow's Place" property="og:title" />
+    <title>TheAirBlow's Website</title>
+    <meta content="TheAirBlow's Website" property="og:title" />
     <meta content="Personal website 'n all" property="og:description" />
     <meta content="res/autism.png" property="og:image" />
     <meta name="theme-color" content="#3279a8">
@@ -20,28 +20,74 @@
             <img class="is-rounded" src="res/autism.png" alt="Profile Picture" />
         </figure>
     </div>
-    <div class="column is-narrow content">
-        <h1>TheAirBlow</h1>
-        <p>
+    <div class="column is-narrow content marginless">
+        <h1>TheAirBlow <i class="fa-solid fa-hand-point-up"></i></h1>
+        <span>
             Yes, this is my personal website.<br>
-            Have a fun time aiming :D<br>
-            <span class="is-size-7">(you can also drag the cards btw)</span>
-        </p>
+            Have a fun time aiming <i class="fa-regular fa-face-laugh"></i><br>
+            <span class="is-size-7">(click <i class="fa-solid fa-circle-info"></i> to learn more)</span>
+        </span>
         <noscript>
             <p>Please enable JavaScript >:(</p>
         </noscript>
     </div>
-</div>
-<div class="columns is-mobile debug-info">
-    <div class="column is-narrow">
-        <span id="fps">0 FPS</span>
+    <div class="modal is-active" id="help-modal" style="display: none; opacity: 0;">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title"><i class="fa-solid fa-circle-info"></i> Information</p>
+                <button class="delete is-large help-close"></button>
+            </header>
+            <section class="modal-card-body">
+                <div class="content">
+                    <h2><i class="fa-solid fa-paper-plane"></i> Flying Cards</h2>
+                    <p>
+                        The entire website is based on flying cards, which have realistic bouncing.
+                        To find what you're looking for, first locate the card, aim and click at it.
+                        On phones, speed of cards is capped at a much lower value, so it'd be easier.
+                    </p>
+                    <h2><i class="fa-solid fa-expand"></i> Dragging</h2>
+                    <p>
+                        You can also forcibly drag flying cards. All other flying cards will still interact
+                        with it, but the one you are dragging will not be affected. This also means that you
+                        can drag it out of the window, which is very intentional. Being able to bounce other
+                        flying cards into the abyss is also, very, very intentional :D
+                    </p>
+                    <h2><i class="fa-solid fa-hand"></i> Actions</h2>
+                    <p>
+                        There's 3 types of actions a flying card can perform:
+                    </p>
+                    <ul>
+                        <li>Open a URL in a new tab</li>
+                        <li>Go to the previous menu</li>
+                        <li>Open a new menu</li>
+                    </ul>
+                    <h2><i class="fa-solid fa-toggle-off"></i> Buttons</h2>
+                    <p>
+                        You should've noticed 3 buttons below:
+                    </p>
+                    <ul>
+                        <li><i class="fa-solid fa-rotate"></i> <b>Reset</b> - Randomizes position and velocity</li>
+                        <li><i class="fa-solid fa-circle-pause"></i> <b>Pause</b> - Pauses physics and velocity</li>
+                        <li><i class="fa-solid fa-circle-info"></i> <b>Help</b> - Shows this window</li>
+                    </ul>
+                </div>
+            </section>
+            <footer class="modal-card-foot">
+                <div class="buttons">
+                    <button class="button is-success help-close">OK, thanks</button>
+                </div>
+            </footer>
+        </div>
     </div>
 </div>
-<div class="columns is-mobile control-buttons">
-    <div class="column is-narrow">
-        <i class="fa-solid fa-rotate is-clickable" id="refresh" title="Refresh"></i>
-        <i class="fa-solid fa-circle-pause is-clickable" id="pause" title="Pause"></i>
-    </div>
+<div class="debug-info">
+    <span id="fps">0 FPS</span>
+</div>
+<div class="control-buttons">
+    <i class="fa-solid fa-rotate" id="refresh" title="Reset"></i>
+    <i class="fa-solid fa-circle-pause" id="pause" title="Pause"></i>
+    <i class="fa-solid fa-circle-info" id="help" title="Help"></i>
 </div>
 <div class="on-top-of-everyone flying-card rows" data-action="expand" data-target="socials">
     <div class="row">

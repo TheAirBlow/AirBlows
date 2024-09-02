@@ -1,6 +1,9 @@
 * {
     font-family: "Comfortaa", sans-serif;
-    user-select: none;
+}
+
+html, body {
+    overflow: hidden;
 }
 
 .on-top-of-everyone {
@@ -19,12 +22,13 @@
 
 .flying-card {
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     transition: background 100ms ease;
+    border-radius: 16px;
+    user-select: none;
     text-align: center;
     text-wrap: nowrap;
     font-size: 1.25rem;
@@ -36,24 +40,14 @@
     font-size: 3em;
 }
 
-@media (max-width: 480px) {
-    .flying-card {
-        font-size: 1rem;
-        padding: 15px;
-    }
-
-    .flying-card i {
-        font-size: 2em;
-    }
-}
-
 .debug-info {
     margin-bottom: 0 !important;
     align-items: flex-start;
     justify-content: left;
     position: absolute;
-    bottom: 12px;
-    left: 20px;
+    font-size: 1.5em;
+    bottom: 25px;
+    left: 25px;
     z-index: 4;
 }
 
@@ -62,11 +56,30 @@
     align-items: flex-start;
     justify-content: left;
     position: absolute;
-    bottom: 12px;
-    right: 20px;
+    bottom: 25px;
+    right: 25px;
     z-index: 4;
 }
 
 .control-buttons i {
-    font-size: 1.5em;
+    transition: transform 100ms ease;
+    padding-left: 10px;
+    margin-bottom: 0;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.control-buttons i:hover {
+    transform: translateY(-10px);
+}
+
+@media (max-width: 480px) {
+    .flying-card {
+        font-size: 1.2rem;
+        padding: 15px;
+    }
+
+    .flying-card i {
+        font-size: 2.2em;
+    }
 }
