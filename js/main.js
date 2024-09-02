@@ -49,11 +49,6 @@ function checkCollisions() {
                 const overlapY = minDistY - Math.abs(distY);
 
                 // make sure they don't clip into each other
-                cardA.forced = !cardA.dragged && (cardA.x <= 0 || cardA.x > window.innerWidth
-                    || cardA.y <= 0 || cardA.y >= window.innerHeight);
-                cardB.forced = !cardB.dragged && (cardB.x <= 0 || cardB.x > window.innerWidth
-                    || cardB.y <= 0 || cardB.y >= window.innerHeight);
-
                 if (overlapX < overlapY) {
                     if (distX > 0) {
                         if (!cardA.dragged) cardA.x += overlapX / 2;
@@ -72,12 +67,10 @@ function checkCollisions() {
                     }
                 }
 
-                if (!cardA.forced)
-                    cardA.forced = !cardA.dragged && (cardA.x <= 0 || cardA.x > window.innerWidth
-                        || cardA.y <= 0 || cardA.y >= window.innerHeight);
-                if (!cardB.forced)
-                    cardB.forced = !cardB.dragged && (cardB.x <= 0 || cardB.x > window.innerWidth
-                        || cardB.y <= 0 || cardB.y >= window.innerHeight);
+                cardA.forced = !cardA.dragged && cardB.dragged && (cardA.x <= 0 || cardA.x > window.innerWidth
+                    || cardA.y <= 0 || cardA.y >= window.innerHeight);
+                cardB.forced = !cardB.dragged && cardA.dragged && (cardB.x <= 0 || cardB.x > window.innerWidth
+                    || cardB.y <= 0 || cardB.y >= window.innerHeight);
 
                 // choose normal
                 let normalX = distX / Math.sqrt(distX * distX + distY * distY);
