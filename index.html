@@ -14,14 +14,17 @@
     <link rel="stylesheet" href="css/main.css"/>
 </head>
 <body class="theme-dark">
-<div class="columns is-mobile is-align-items-center is-justify-content-center marginless" style="height: 100vh">
-    <div class="column is-narrow">
-        <figure class="image is-128x128" id="pfp">
-            <img class="is-rounded" src="res/autism.png" alt="Profile Picture" />
+<div class="columns is-mobile is-align-items-center is-justify-content-center marginless bg-about-me" style="height: 100vh">
+    <div class="column is-narrow" id="koronba1">
+        <figure class="image">
+            <img src="res/koronba1.png" alt="Koronba Decoration" />
         </figure>
     </div>
-    <div class="column is-narrow content marginless">
-        <h1>TheAirBlow <i class="fa-solid fa-hand-point-up"></i></h1>
+    <div class="column is-narrow">
+        <img class="is-rounded" src="res/koronba.gif" alt="Koronba Box" />
+    </div>
+    <!--div class="column is-narrow content marginless">
+        <h1>TheAirBlow</h1>
         <span>
             Yes, this is my personal website.<br>
             Have a fun time aiming <i class="fa-regular fa-face-laugh"></i><br>
@@ -30,13 +33,54 @@
         <noscript>
             <p>Please enable JavaScript >:(</p>
         </noscript>
+    </div>-->
+    <div class="modal is-active" id="about-me" style="display: none; opacity: 0;">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title"><i class="fa-solid fa-at"></i> About me</p>
+                <button class="delete is-large close-button" data-target="#about-me"></button>
+            </header>
+            <section class="modal-card-body">
+                <div class="content">
+                    <h2><i class="fa-solid fa-hands-clapping"></i> Hello there!</h2>
+                    <p>
+                        Hello there! I am a fellow Russian that does things.<br>
+                        Usually I'm making totally random stuff because of being bored.<br>
+                        You can see more of my projects on my GitLab, <em class="is-size-7">which you know how to find :P</em>
+                    </p>
+                    <h2><i class="fa-solid fa-comments"></i> What do I know?</h2>
+                    <ul>
+                        <li><b>C#</b> - My main language of choice, decent knowledge of ASP.NET and the Unity game engine.</li>
+                        <li><b>JavaScript</b> - The language I hate the most, which I use mainly for addon and frontend development.</li>
+                        <li><b>C/C++</b> - Decent base of knowledge, but I don't use it in any public projects.</li>
+                        <li><b>Java</b> - Mostly Minecraft mod and Android development. C# is better though!</li>
+                        <li><b>Linux</b> - I use arch btw™</li>
+                    </ul>
+                    <h2><i class="fa-solid fa-paper-plane"></i> How to contact?</h2>
+                    <p>
+                        You can contact me at <a href="mailto://theairblow@gmail.com">theairblow@gmail.com</a> by email.<br>
+                        I am also available on social media, <em class="is-size-7">which you know how to find :P</em>
+                    </p>
+                    <h2><i class="fa-solid fa-circle-question"></i> What's with the background?</h2>
+                    <p>
+                        It's a reference to Koronba - Yatsume Ana, <a href="https://vocadb.net/S/91592">more info about it here</a>.
+                    </p>
+                </div>
+            </section>
+            <footer class="modal-card-foot">
+                <div class="buttons">
+                    <button class="button is-success close-button" data-target="#about-me">OK, thanks</button>
+                </div>
+            </footer>
+        </div>
     </div>
     <div class="modal is-active" id="help-modal" style="display: none; opacity: 0;">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
                 <p class="modal-card-title"><i class="fa-solid fa-circle-info"></i> Information</p>
-                <button class="delete is-large help-close"></button>
+                <button class="delete is-large close-button" data-target="#help-modal"></button>
             </header>
             <section class="modal-card-body">
                 <div class="content">
@@ -75,10 +119,15 @@
             </section>
             <footer class="modal-card-foot">
                 <div class="buttons">
-                    <button class="button is-success help-close">OK, thanks</button>
+                    <button class="button is-success close-button" data-target="#help-modal">OK, thanks</button>
                 </div>
             </footer>
         </div>
+    </div>
+    <div class="column is-narrow" id="koronba2">
+        <figure class="image">
+            <img src="res/koronba2.png" alt="Koronba Decoration" />
+        </figure>
     </div>
 </div>
 <div class="debug-info">
@@ -89,213 +138,7 @@
     <i class="fa-solid fa-circle-pause" id="pause" title="Pause"></i>
     <i class="fa-solid fa-circle-info" id="help" title="Help"></i>
 </div>
-<div class="on-top-of-everyone flying-card rows" data-action="expand" data-target="socials">
-    <div class="row">
-        <i class="fa-solid fa-retweet"></i>
-    </div>
-    <div class="row">
-        <p class="has-text-weight-bold">Socials</p>
-    </div>
-</div>
-<div class="on-top-of-everyone flying-card rows" data-action="expand" data-target="projects">
-    <div class="row">
-        <i class="fa-solid fa-code"></i>
-    </div>
-    <div class="row">
-        <p class="has-text-weight-bold">Projects</p>
-    </div>
-</div>
-<div class="on-top-of-everyone flying-card rows" data-action="expand" data-target="services">
-    <div class="row">
-        <i class="fa-solid fa-server"></i>
-    </div>
-    <div class="row">
-        <p class="has-text-weight-bold">Services</p>
-    </div>
-</div>
-<div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://sussy.dev/">
-    <div class="row">
-        <i class="fa-solid fa-star"></i>
-    </div>
-    <div class="row">
-        <p class="has-text-weight-bold">sussy.dev</p>
-    </div>
-</div>
-<div id="services">
-    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://pass.airblo.ws/" style="display: none;">
-        <div class="row">
-            <i class="fa-solid fa-lock"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">Vaultwarden</p>
-        </div>
-    </div>
-    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://git.sussy.dev/" style="display: none;">
-        <div class="row">
-            <i class="fa-brands fa-gitlab"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">Gitlab</p>
-        </div>
-    </div>
-    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://www.youtube.com/watch?v=o-YBDTqX_ZU" style="display: none;">
-        <div class="row">
-            <i class="fa-solid fa-face-sad-cry"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">Free Proxy</p>
-        </div>
-    </div>
-    <div class="on-top-of-everyone flying-card rows" data-action="back" style="display: none;">
-        <div class="row">
-            <i class="fa-solid fa-backward"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">Go Back</p>
-        </div>
-    </div>
-</div>
-<div id="projects">
-    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://github.com/Samsung-Loki/Thor" style="display: none;">
-        <div class="row">
-            <i class="fa-solid fa-hammer"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">Thor</p>
-        </div>
-    </div>
-    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://github.com/Samsung-Loki/Syndical" style="display: none;">
-        <div class="row">
-            <i class="fa-solid fa-download"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">Syndical</p>
-        </div>
-    </div>
-    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://github.com/TheAirBlow/FastStages" style="display: none;">
-        <div class="row">
-            <i class="fa-solid fa-truck-fast"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">FastStages</p>
-        </div>
-    </div>
-    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://github.com/TheAirBlow/BetterParties" style="display: none;">
-        <div class="row">
-            <i class="fa-solid fa-book-bookmark"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">BetterParties</p>
-        </div>
-    </div>
-    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://github.com/TheAirBlow/HyperSploit" style="display: none;">
-        <div class="row">
-            <i class="fa-solid fa-bomb"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">HyperSploit</p>
-        </div>
-    </div>
-    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://github.com/TheAirBlow/Raylib-ImGui" style="display: none;">
-        <div class="row">
-            <i class="fa-solid fa-desktop"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">Raylib-ImGui</p>
-        </div>
-    </div>
-    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://github.com/TheAirBlow/DisControl" style="display: none;">
-        <div class="row">
-            <i class="fa-brands fa-discord"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">DisControl</p>
-        </div>
-    </div>
-    <div class="on-top-of-everyone flying-card rows" data-action="back" style="display: none;">
-        <div class="row">
-            <i class="fa-solid fa-backward"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">Go Back</p>
-        </div>
-    </div>
-</div>
-<div id="socials">
-    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://github.com/TheAirBlow/" style="display: none;">
-        <div class="row">
-            <i class="fa-brands fa-github"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">Github</p>
-        </div>
-    </div>
-    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://xdaforums.com/m/theairblow.11597903/" style="display: none;">
-        <div class="row">
-            <i class="fa-solid fa-comments"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">XDA Forums</p>
-        </div>
-    </div>
-    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://www.reddit.com/user/theairblow_/" style="display: none;">
-        <div class="row">
-            <i class="fa-brands fa-reddit-alien"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">Reddit</p>
-        </div>
-    </div>
-    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://x.com/theairblow" style="display: none;">
-        <div class="row">
-            <i class="fa-brands fa-twitter"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">Tw*tter</p>
-        </div>
-    </div>
-    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://codeforces.com/profile/TheAirBlow" style="display: none;">
-        <div class="row">
-            <i class="fa-solid fa-code"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">Codeforces</p>
-        </div>
-    </div>
-    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://www.tiktok.com/@theairblow" style="display: none;">
-        <div class="row">
-            <i class="fa-brands fa-tiktok"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">Tiktok</p>
-        </div>
-    </div>
-    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://discordlookup.com/user/777865084013510696" style="display: none;">
-        <div class="row">
-            <i class="fa-brands fa-discord"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">Discord</p>
-        </div>
-    </div>
-    <div class="on-top-of-everyone flying-card rows" data-action="open-tab" data-target="https://t.me/theairblow" style="display: none;">
-        <div class="row">
-            <i class="fa-brands fa-telegram"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">Telegram</p>
-        </div>
-    </div>
-    <div class="on-top-of-everyone flying-card rows" data-action="back" style="display: none;">
-        <div class="row">
-            <i class="fa-solid fa-backward"></i>
-        </div>
-        <div class="row">
-            <p class="has-text-weight-bold">Go Back</p>
-        </div>
-    </div>
-</div>
 <script src="lib/jquery/jquery.min.js"></script>
-<script src="js/main.js"></script>
+<script src="js/main.js" type="module"></script>
 </body>
 </html>
