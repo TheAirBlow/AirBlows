@@ -97,7 +97,7 @@ export class Card {
         this.el.removeClass("dragged");
         this.el.addClass("pop-in");
         $(document).off("mousemove.drag mouseup.drag");
-        this.dragged = false;
+        this.dragged = this.interactable;
         this.performAction();
     }
 
@@ -109,7 +109,6 @@ export class Card {
         let card = this;
         switch (this.action) {
             case "open-tab": {
-                this.dragged = true;
                 this.reInitialize(function() {
                     window.open(card.target, '_blank');
                 });
@@ -120,7 +119,6 @@ export class Card {
                 break;
             }
             case "show": {
-                this.dragged = true;
                 this.reInitialize(function() {
                     $(card.target).show().fadeTo(200, 1);
                 });
