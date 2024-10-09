@@ -109,6 +109,7 @@ export class Card {
         let card = this;
         switch (this.action) {
             case "open-tab": {
+                this.dragged = true;
                 this.reInitialize(function() {
                     window.open(card.target, '_blank');
                 });
@@ -119,6 +120,7 @@ export class Card {
                 break;
             }
             case "show": {
+                this.dragged = true;
                 this.reInitialize(function() {
                     $(card.target).show().fadeTo(200, 1);
                 });
@@ -139,6 +141,7 @@ export class Card {
         if (this.el === null) throw new Error(
             "No element was created for this card");
         this.el.show();
+        this.dragged = false;
         this.main.enableCard(this);
         this.el.removeClass('pop-out');
         this.el.addClass("pop-in");
