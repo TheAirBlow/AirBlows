@@ -34,7 +34,7 @@ export default class CardGame {
         // configurable stuff below
         this.maxSpeedCap = window.innerWidth <= 480 ? 5 : 12;
         this.minSpeedCap = window.innerWidth <= 480 ? 3 : 5;
-        this.dragMinimumDist = 10;
+        this.dragMinimumDist = 20;
 
         // making sure collision runs well on phones
         this.ticksPerSecond = 40;

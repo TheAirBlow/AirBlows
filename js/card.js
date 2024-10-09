@@ -118,6 +118,7 @@ export class Card {
             }
             case "show": {
                 $(this.target).show().fadeTo(200, 1);
+                this.reInitialize();
                 break;
             }
             case "back": {
@@ -176,8 +177,7 @@ export class Card {
     reInitialize() {
         this.hideElement(card => {
             card.forced = false;
-            card.randomize();
-            card.showElement();
+            card.initialize();
         });
     }
 
