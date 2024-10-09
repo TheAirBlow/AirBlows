@@ -97,8 +97,8 @@ export class Card {
         this.el.removeClass("dragged");
         this.el.addClass("pop-in");
         $(document).off("mousemove.drag mouseup.drag");
-        this.performAction();
         this.dragged = false;
+        this.performAction();
     }
 
     /**
