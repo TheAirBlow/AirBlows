@@ -106,10 +106,12 @@ export class Card {
      */
     performAction() {
         if (!this.interactable) return;
+        let card = this;
         switch (this.action) {
             case "open-tab": {
-                window.open(this.target, '_blank');
-                this.reInitialize();
+                this.reInitialize(function() {
+                    window.open(card.target, '_blank');
+                });
                 break;
             }
             case "expand": {
@@ -117,8 +119,9 @@ export class Card {
                 break;
             }
             case "show": {
-                $(this.target).show().fadeTo(200, 1);
-                this.reInitialize();
+                this.reInitialize(function() {
+                    $(card.target).show().fadeTo(200, 1);
+                });
                 break;
             }
             case "back": {
@@ -174,10 +177,12 @@ export class Card {
     /**
      * Re-initializes element
      */
-    reInitialize() {
+    reInitialize(callback) {
         this.hideElement(card => {
             card.forced = false;
             card.initialize();
+            if (typeof callback === 'function')
+                callback(this);
         });
     }
 
