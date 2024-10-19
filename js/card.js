@@ -20,6 +20,7 @@ export class Card {
         // Dragging
         this.lastPos = { x: 0, y: 0 };
         this.curPos = { x: 0, y: 0 };
+        this.startPos = { x: 0, y: 0 };
         this.dragged = false;
 
         // Properties
@@ -62,6 +63,7 @@ export class Card {
     onMouseDown(e) {
         this.lastPos = { x: e.clientX, y: e.clientY };
         this.curPos = { x: e.clientX, y: e.clientY };
+        this.startPos = { x: e.clientX, y: e.clientY };
         this.el.removeClass("pop-in");
         this.el.addClass("dragged");
         this.interactable = true;
@@ -76,7 +78,8 @@ export class Card {
      */
     onMouseMove(e) {
         if (this.interactable) {
-            if (Math.abs(this.x - e.clientX) + Math.abs(this.y - e.clientY) > this.main.dragMinimumDist)
+            const dist = Math.abs(this.startPos.x - e.clientX) + Math.abs(this.startPos.y - e.clientY);
+            if (dist > this.main.dragMinimumDist)
                 this.interactable = false;
             return;
         }

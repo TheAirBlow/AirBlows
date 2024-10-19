@@ -6,6 +6,12 @@ html, body {
     overflow: hidden;
 }
 
+@keyframes l3{
+    25% {background-position: 0 0   ,100% 100%,100% calc(100% - 5px)}
+    50% {background-position: 0 100%,100% 100%,0    calc(100% - 5px)}
+    75% {background-position: 0 100%,100%    0,100% 5px}
+}
+
 .on-top-of-everyone {
     position: absolute;
     z-index: 3;
