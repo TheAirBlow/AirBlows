@@ -208,8 +208,8 @@ export class Card {
         if (this.el === null) throw new Error(
             "No element was created for this card");
         if (!this.dragged) {
-            this.x += this.xSpeed * this.main.timeSpeed;
-            this.y += this.ySpeed * this.main.timeSpeed;
+            this.x += this.xSpeed * this.main.timeSpeed * (this.main.deltaTime / 20);
+            this.y += this.ySpeed * this.main.timeSpeed * (this.main.deltaTime / 20);
 
             if (!this.forced) {
                 if (this.x <= 0) {
