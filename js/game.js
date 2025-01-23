@@ -39,6 +39,7 @@ export default class CardGame {
         // making sure collision runs well on phones
         this.ticksPerSecond = 40;
         this.tickDuration = 1000 / this.ticksPerSecond;
+        this.maxDeltaTime = this.tickDuration * 5;
         this.lastTickTime = null;
         this.deltaTime = 0;
     }
@@ -68,7 +69,12 @@ export default class CardGame {
         this.framesPerSecond++;
         if (this.lastTickTime === null)
             this.lastTickTime = timestamp;
+
         this.deltaTime += timestamp - this.lastTickTime;
+        if (this.deltaTime > this.maxDeltaTime) {
+            this.deltaTime = this.maxDeltaTime;
+        }
+
         if (this.deltaTime >= this.tickDuration) {
             this.collision.collideAll();
             this.deltaTime -= this.tickDuration;
