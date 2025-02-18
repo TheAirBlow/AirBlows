@@ -131,7 +131,7 @@ const groups = [{
         title: "Gitlab",
     }, {
         action: "open-tab",
-        target: "https://www.youtube.com/watch?v=o-YBDTqX_ZU",
+        target: "https://sipacid.com/wits.mp4",
         icon: "fa-solid fa-face-sad-cry",
         title: "Free Proxy",
     }, {
